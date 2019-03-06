@@ -2,7 +2,7 @@ pipeline {
   environment {
     registry = "dipankar435/docker-repo"
     registryCredential = 'dockerhub'
-    dockerImage = 'node-app'
+    dockerImage = ''
   }
   agent any
   tools {nodejs "node" }
@@ -32,7 +32,7 @@ pipeline {
     stage('Push Image') {
       steps{
          script {
-            docker.withRegistry( 'node-app', registryCredential ) {
+            docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
           }
         }
