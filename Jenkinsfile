@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Building image') {
       steps{
-        sh 'docker build --tag=node-app .'
+        sh 'sudo docker build --tag=node-app .'
       }
     }
     stage('Push Image') {
