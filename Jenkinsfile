@@ -24,7 +24,9 @@ pipeline {
     }
     stage('Building image') {
       steps{
-        sh 'sudo docker build --tag=node-app .'
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
       }
     }
     stage('Push Image') {
