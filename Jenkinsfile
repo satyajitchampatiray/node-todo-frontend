@@ -39,10 +39,17 @@ pipeline {
         }
       }
     }
-    stage('Run Container') {
+    stage('Cleanup') {
+      when {
+                expression { containerId != '' }
+        }
       steps {
         sh 'docker stop ${containerId}'
         sh 'docker rm ${containerId}'
+      }
+    }
+    stage('Run Container') {
+      steps {
         sh 'docker run --name=node-app -d -p 3000:3000 $registry:$BUILD_NUMBER &'
       }
     }
