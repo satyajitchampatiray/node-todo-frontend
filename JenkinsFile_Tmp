@@ -33,6 +33,7 @@ pipeline {
             dockerImage.push()
           }
         }
+       }
       }
    }
 }
