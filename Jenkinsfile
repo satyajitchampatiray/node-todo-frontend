@@ -2,7 +2,7 @@ pipeline {
   environment {
     registry = "dipankar435/docker-repo"
     registryCredential = 'dockerhub'
-    dockerImage = ''
+    dockerImage = 'node-app'
   }
   agent any
   tools {nodejs "node" }
@@ -24,15 +24,13 @@ pipeline {
     }
     stage('Building image') {
       steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
+        sh 'docker build --tag=node-app .'
       }
     }
     stage('Push Image') {
       steps{
          script {
-            docker.withRegistry( '', registryCredential ) {
+            docker.withRegistry( 'node-app', registryCredential ) {
             dockerImage.push()
           }
         }
