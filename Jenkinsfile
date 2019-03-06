@@ -3,6 +3,7 @@ pipeline {
     registry = "dipankar435/docker-repo"
     registryCredential = 'dockerhub'
     dockerImage = ''
+    containerId = sh(script: 'docker ps -aqf "name=node-app"', returnStdout: true)
   }
   agent any
   tools {nodejs "node" }
@@ -39,7 +40,7 @@ pipeline {
       }
     }
     stage('Run Container') {
-      def containerId = sh(script: 'docker ps -aqf "name=node-app"', returnStdout: true)
+      // def containerId = sh(script: 'docker ps -aqf "name=node-app"', returnStdout: true)
       steps {
         //containerId = sh(script: 'docker ps -aqf "name=node-app"', returnStdout: true)
         sh 'docker stop ${containerId}'
