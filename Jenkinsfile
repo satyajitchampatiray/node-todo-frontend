@@ -40,7 +40,7 @@ pipeline {
     }
     stage('Run Container') {
       steps {
-        sh 'docker run -p 3000:3000 $registry:$BUILD_NUMBER'
+        sh 'docker run -d -p 3000:3000 $registry:$BUILD_NUMBER'
       }
     }
     stage('Remove Unused docker image') {
