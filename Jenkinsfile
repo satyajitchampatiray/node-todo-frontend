@@ -39,10 +39,11 @@ pipeline {
       }
     }
     stage('Run Container') {
+      def containerId = sh(script: 'docker ps -aqf "name=node-app"', returnStdout: true)
       steps {
         //containerId = sh(script: 'docker ps -aqf "name=node-app"', returnStdout: true)
-        //sh 'docker stop $containerId'
-        //sh 'docker rm $containerId'
+        sh 'docker stop ${containerId}'
+        sh 'docker rm ${containerId}'
         sh 'docker run --name=node-app -d -p 3000:3000 $registry:$BUILD_NUMBER &'
       }
     }
